@@ -30,7 +30,7 @@ pytest tests/unit/test_relevance_scorer.py -q
 
 The test suite completed with 18 passing tests and 1 expected failure (xfail). Although the specific assertion described in the issue was not reproduced as an active failing test, inspection of the issue and test code indicates that the fixture used by `test_query_with_partial_overlap` may still not accurately represent partial keyword overlap. Further investigation will focus on the test fixture and its expected behavior.
 
-**PLAN.md link:** [link to PLAN.md in your fork]
+**PLAN.md link:** (https://github.com/codepath/pathreview-ai201-fa26-howard/commit/fdbaba75424ab8aff2e33d00f0b912279337f4b5)
 
 **Blockers or open questions:**
 None at the moment
