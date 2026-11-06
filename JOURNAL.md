@@ -17,3 +17,20 @@ The issue is in the relevance scorer test suite, specifically test_query_with_pa
 **Setup confirmation:** [x] App runs locally at localhost:5173
 
 **Cohort ledger:** [x] Issue added to cohort ledger
+
+## Unit 8 — Reproduction & solution planning
+
+**Reproduction commit link:** [link to commit documenting the reproduced issue]
+
+**Reproduction summary:**
+
+I ran:
+
+pytest tests/unit/test_relevance_scorer.py -q
+
+The test suite completed with 18 passing tests and 1 expected failure (xfail). Although the specific assertion described in the issue was not reproduced as an active failing test, inspection of the issue and test code indicates that the fixture used by `test_query_with_partial_overlap` may still not accurately represent partial keyword overlap. Further investigation will focus on the test fixture and its expected behavior.
+
+**PLAN.md link:** [link to PLAN.md in your fork]
+
+**Blockers or open questions:**
+[Anything you're still uncertain about going into Unit 9, or leave blank]
