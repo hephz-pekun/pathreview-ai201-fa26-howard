@@ -20,7 +20,7 @@ The issue is in the relevance scorer test suite, specifically test_query_with_pa
 
 ## Unit 8 — Reproduction & solution planning
 
-**Reproduction commit link:** [link to commit documenting the reproduced issue]
+**Reproduction commit link:** (https://github.com/codepath/pathreview-ai201-fa26-howard/commit/8300055894fda78b1ee828a65a3ea5f33e854118)
 
 **Reproduction summary:**
 
@@ -33,4 +33,4 @@ The test suite completed with 18 passing tests and 1 expected failure (xfail). A
 **PLAN.md link:** [link to PLAN.md in your fork]
 
 **Blockers or open questions:**
-[Anything you're still uncertain about going into Unit 9, or leave blank]
+None at the moment
