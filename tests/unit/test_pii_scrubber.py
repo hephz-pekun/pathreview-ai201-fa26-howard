@@ -1,8 +1,43 @@
 """Tests for pii_scrubber.py"""
 
 import pytest
+from hypothesis import given
+from hypothesis import strategies as st
 
 from safety.pii_scrubber import PIIScrubber
+
+EMAIL_LOCAL = st.text(
+    alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
+    min_size=1,
+    max_size=10,
+)
+
+EMAIL_LOCAL_SUFFIX = st.text(
+    alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789._%+-",
+    min_size=0,
+    max_size=10,
+)
+
+EMAIL_DOMAIN = st.text(
+    alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
+    min_size=1,
+    max_size=10,
+)
+
+EMAIL_TLD = st.sampled_from(["com", "org", "net", "edu"])
+
+
+def build_email(local, suffix, domain, tld):
+    return f"{local}{suffix}@{domain}.{tld}"
+
+
+EMAILS = st.builds(
+    build_email,
+    EMAIL_LOCAL,
+    EMAIL_LOCAL_SUFFIX,
+    EMAIL_DOMAIN,
+    EMAIL_TLD,
+)
 
 
 @pytest.mark.unit
@@ -272,3 +307,33 @@ class TestPIIScrubber:
 
         # Should be minimal or no detections
         # (version number shouldn't be flagged as SSN)
+
+    @given(EMAILS)
+    def test_property_email_redaction(self, email):
+        scrubber = PIIScrubber()
+
+        text = f"Contact me at {email}"
+        scrubbed = scrubber.scrub(text)
+
+        assert email not in scrubbed
+        assert "[REDACTED]" in scrubbed
+
+    @given(EMAILS)
+    def test_property_email_detection(self, email):
+        scrubber = PIIScrubber()
+
+        detected = scrubber.detect(f"Email: {email}")
+
+        email_hits = [d for d in detected if d["type"] == "email"]
+
+        assert len(email_hits) == 1
+        assert email_hits[0]["value"] == email
+
+    @given(st.text())
+    def test_property_scrub_idempotent(self, text):
+        scrubber = PIIScrubber()
+
+        once = scrubber.scrub(text)
+        twice = scrubber.scrub(once)
+
+        assert once == twice
