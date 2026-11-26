@@ -4,7 +4,7 @@
 **Student:** Hephzibah Olanipekun  
 **GitHub Username:** hephz-pekun  
 **Issue:** https://github.com/codepath/pathreview-ai201-fa26-howard/issues/45
-**Pull Request:** PR_LINK_HERE
+**Pull Request:** https://github.com/hephz-pekun/pathreview-ai201-fa26-howard/pull/1#issue-6619488752
 
 ---
 
@@ -199,7 +199,7 @@ Replaced the original email strategy with a constrained generator aligned with t
 
 ## Pull Request
 
-**PR Link:** PR_LINK_HERE
+**PR Link:** https://github.com/hephz-pekun/pathreview-ai201-fa26-howard/pull/1#issue-6619488752
 
 ### PR Description
 
